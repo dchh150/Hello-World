@@ -1,2 +1,2 @@
 # Hello-World
-My frist repository
+My first repository
