@@ -1,4 +1,4 @@
 # Hello-World
-My first repository
+My first repository.
 
-Life is short, you need Python
+Life is short, you need Python.
