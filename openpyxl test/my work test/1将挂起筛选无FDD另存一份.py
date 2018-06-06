@@ -8,7 +8,7 @@ def filterdata(loadfl,con_dict,savefl='new_excel.xlsx'):
         wb1=load_workbook(filename=loadfl)
         ws1=wb1.active
         wb2=Workbook(write_only=True)
-        ws2=wb2.create_sheet()
+        ws2=wb2.create_sheet(title=ws1.title)
         ws2.append(ws1[1])        #加入第一行表头
         site_dict={i:v.value for i,v in enumerate(ws1[1]) if v.value in con_dict}        #将表头条件字典转换为列数的条件字典
         for row1 in ws1.rows:
@@ -17,11 +17,12 @@ def filterdata(loadfl,con_dict,savefl='new_excel.xlsx'):
         wb2.save(savefl)
         wb2.close()
         wb1.close()
-        return print('操作完成')
+        return print('筛选另存为操作完成')
     except FileNotFoundError as err:
-        return print('文件名错误:',err)
+        return print('源文件名错误:',err)
 
 def conditionf(wsrow,con_dict,site_dict):
+    if site_dict=={}:return False
     for each in site_dict:
         if not wsrow[each].value in con_dict[site_dict[each]]:
             return False
@@ -32,7 +33,7 @@ def main():
     savefile=loadfile[0:-5]+'-无FDD.xlsx'
     con_dict={
         '网络制式':['TDD','LTE']
-    }
+    }   #con_dict是筛选的条件，条件之间的关系为AND
     
     print("="*40)
     print('源文件：',loadfile)
