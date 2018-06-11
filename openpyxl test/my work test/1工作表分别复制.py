@@ -29,6 +29,9 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets):
         wb1.close()
         return print('已将',loadfl,loadsheets,'\n复制到',savefl,savesheets,'\n','=='*10)
 
+def d_rang_border(loadfl,loadsheets,range_BOR,side_stype=1):
+    pass
+
 def main():
     d_cmd=input('1:自动复制到三个挂起文件；\n2:手动输入;\n输入其他无效,请输出入：')
     if d_cmd=='1' :
