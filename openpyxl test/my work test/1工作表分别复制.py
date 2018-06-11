@@ -1,6 +1,7 @@
 '''用python实现excel(.xlsx)按工作表分别复制到另一份.xlsx中'''
 from openpyxl import load_workbook
 from openpyxl import Workbook
+from openpyxl.styles import Border,Side
 
 def d_copysheets(loadfl,loadsheets,savefl,savesheets):
     """loadsheets,savesheets为sheet名的列表"""
@@ -29,11 +30,27 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets):
         wb1.close()
         return print('已将',loadfl,loadsheets,'\n复制到',savefl,savesheets,'\n','=='*10)
 
-def d_rang_border(loadfl,loadsheets,range_BOR,side_stype=1):
-    pass
+def d_rang_border(loadfl,loadsheets,range_BOR,border_st=None):
+    if not border_st:
+        thin = Side(border_style="thin", color="000000")
+        border_st=Border(top=thin, left=thin, right=thin, bottom=thin)
+    try:
+        wb1=load_workbook(filename=loadfl)
+        rows=wb1[loadsheets][range_BOR]
+        for row in rows:
+            for cell in row:
+                cell.border=border_st
+    except FileNotFoundError as err:
+        return print('文件名错误:',err)
+    except KeyError as err:
+        return print('工作表Sheet名错误:',err)
+    else:
+        wb1.save(loadfl)
+        wb1.close()
+        return print('已将',loadfl,'\n',loadsheets,'\n中的',range_BOR,'单元格设置好\n','=='*10)
 
 def main():
-    d_cmd=input('1:自动复制到三个挂起文件；\n2:手动输入;\n输入其他无效,请输出入：')
+    d_cmd=input('1:自动复制到三个挂起文件；\n2:手动输入;\n输入其他无效,请输入：')
     if d_cmd=='1' :
         if input('确认输入"ok"回车后，开始自动复制：')=='ok':
             d_copysheets(\
@@ -63,3 +80,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    d_rang_border('a.xlsx','Sheet1','a1:f8')
