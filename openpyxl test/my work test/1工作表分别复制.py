@@ -44,6 +44,8 @@ def d_rang_border(loadfl,loadsheets,range_BOR,border_st=None):
         return print('文件名错误:',err)
     except KeyError as err:
         return print('工作表Sheet名错误:',err)
+    except ValueError as err:
+        return print('范围设置错误:',err)
     else:
         wb1.save(loadfl)
         wb1.close()
@@ -68,6 +70,8 @@ def main():
                 ['查询3_1_维护类_本周清单', '查询3_2_维护类_新增', '查询3_3_维护类_解除'],\
                 r'E:\2017工作-ET\开网优化\进度统计\统计工具\access导出文件夹\输出模板\附件：开网优化项目_维护类_挂起工单清单2018xxxx.xlsx',\
                 ['开网优化维护类挂起工单', '本周新增挂起工单', '本周已解除挂起工单'])
+            d_rang_border(r'E:\2017工作-ET\开网优化\进度统计\统计工具\access导出文件夹\输出模板\附件二：LTE开网优化状态库挂起工单2018xxxx.xlsx',\
+                '统计','a1:h24')
     elif d_cmd=='2':
         loadfl=input('输入源文件（.xlsx）：')
         loadsheets=input('输入源工作表列表(如："Sheet1,Sheet2")：').split(',')
@@ -80,4 +84,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    d_rang_border('a.xlsx','Sheet1','a1:f8')
+    
