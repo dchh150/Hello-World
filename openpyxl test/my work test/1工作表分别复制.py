@@ -15,7 +15,7 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets):
             #删除原表值
             for i,row in enumerate(ws2.iter_rows()):
                 for j,cell in enumerate(row):
-                    ws2.cell(row=i+1, column=j+1, value=None)
+                    ws2.cell(row=i+1, column=j+1, value='')
             #开始复制
             for i,row in enumerate(ws1.iter_rows()):
                 for j,cell in enumerate(row):
