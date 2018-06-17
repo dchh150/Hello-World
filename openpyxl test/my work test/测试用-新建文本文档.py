@@ -8,8 +8,5 @@ for i,row in enumerate(ws1.iter_rows()):
         ws1.cell(row=i+1, column=j+1, value='')
 wb1.save(loadfl)
 wb1.close()
-<<<<<<< HEAD
 #测试0617-----06174
-=======
 #测试0617-----06173-112
->>>>>>> 51c59b96308b3cdb3350fcb70d01201cfe1d1114
