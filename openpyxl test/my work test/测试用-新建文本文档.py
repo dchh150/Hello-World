@@ -8,5 +8,10 @@ for i,row in enumerate(ws1.iter_rows()):
         ws1.cell(row=i+1, column=j+1, value='')
 wb1.save(loadfl)
 wb1.close()
+<<<<<<< HEAD
 #测试0617-----06174-0000
 
+=======
+#测试0617-----06174
+#测试0617-----06173-112
+>>>>>>> parent of 4ce2b7b... 更新测试
