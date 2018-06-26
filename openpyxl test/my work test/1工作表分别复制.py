@@ -55,6 +55,7 @@ def main():
     d_cmd=input('1:自动复制到三个挂起文件；\n2:手动输入;\n输入其他无效,请输入：')
     if d_cmd=='1' :
         if input('确认输入"ok"回车后，开始自动复制：')=='ok':
+            print('请稍后。。。')
             d_copysheets(\
                 r'E:\2017工作-ET\开网优化\进度统计\统计工具\access导出文件夹\查询4-1 本周清单_除异常工单.xlsx',\
                 ['查询4_1_本周清单_除异常工单'],\
@@ -78,6 +79,7 @@ def main():
         savefl=input('输入保存文件（.xlsx）：')
         savesheets=input('输入保存的工作表列表(如："Sheet1,Sheet2")：').split(',')
         if input('确认输入"ok"回车后，开始操作：')=='ok':
+            print('请稍后。。。')
             d_copysheets(loadfl,loadsheets,savefl,savesheets)
     input('操作完成，按任意键退出:')
     return
