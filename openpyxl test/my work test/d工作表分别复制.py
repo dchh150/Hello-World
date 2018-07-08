@@ -3,8 +3,12 @@ from openpyxl import load_workbook
 from openpyxl import Workbook
 from openpyxl.styles import Border,Side
 
-def d_copysheets(loadfl,loadsheets,savefl,savesheets):
-    """loadsheets,savesheets为sheet名的列表"""
+def d_copysheets(loadfl,loadsheets,savefl,savesheets,max_column=None,max_row=None):
+    """将loadfl-excel文件按sheet名复制到savefl-excel文件中，
+    loadsheets,savesheets为sheet名的列表
+    max_column,max_row复制最前~列，行
+    注意：savefl-excel文件会被清空
+    """
     assert len(loadsheets)==len(savesheets)
     try:
         wb1=load_workbook(filename=loadfl)
@@ -18,7 +22,9 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets):
                     ws2.cell(row=i+1, column=j+1, value='')
             #开始复制
             for i,row in enumerate(ws1.iter_rows()):
+                if max_row and i>=max_row:break
                 for j,cell in enumerate(row):
+                    if max_column and j>=max_column:break
                     ws2.cell(row=i+1, column=j+1, value=cell.value)
     except FileNotFoundError as err:
         return print('文件名错误:',err)
@@ -31,6 +37,8 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets):
         return print('已将',loadfl,loadsheets,'\n复制到',savefl,savesheets,'\n','=='*10)
 
 def d_rang_border(loadfl,loadsheets,range_BOR,border_st=None):
+    """将文件（路径）loadfl 的表名loadsheets中的范围range_BOR,设置边框
+    边框参数border_st可选,为Border类"""
     if not border_st:
         thin = Side(border_style="thin", color="000000")
         border_st=Border(top=thin, left=thin, right=thin, bottom=thin)
