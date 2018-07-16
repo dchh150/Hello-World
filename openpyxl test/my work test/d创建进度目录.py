@@ -17,7 +17,7 @@ def main():
     today_ti = datetime.datetime.now()
     today = today_ti.strftime("%Y%m%d")  # '20180625'
     before7_ti = today_ti-datetime.timedelta(days=7)
-    before7 = before7_ti.strftime("%Y%m%d")  # '20180611'
+    before7 = before7_ti.strftime("%Y%m%d")  # '20180618'
     mypath = 'E:/2017工作-ET/开网优化/进度统计/每周进度/'
     mytodaypath = mypath+today
     mybf7path = mypath+before7
