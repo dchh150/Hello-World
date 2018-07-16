@@ -33,8 +33,9 @@ def main():
         '/进度邮件/每日质量通报{}.xlsx',
         '/发给厂家/附件一：21地市单优形象进度原因解析-{}.xlsx',
         '/厂家反馈核查/添加前缀_厂家.bat',
-        '/各文件夹材料备忘.txt'
-    ]
+        '/各文件夹材料备忘.txt',
+        '/ftp/运行py需要把时刻数字删掉.txt'
+        ]
     my_mkdir(mytodaypath)
     for each in mypath2_li:
         my_mkdir(mytodaypath + each)

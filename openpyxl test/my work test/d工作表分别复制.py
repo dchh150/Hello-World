@@ -18,7 +18,9 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets,max_column=None,max_row=Non
             ws2=wb2[savesheets[i]]
             #删除原表值
             for i,row in enumerate(ws2.iter_rows()):
+                if max_row and i>=max_row:break
                 for j,cell in enumerate(row):
+                    if max_column and j>=max_column:break
                     ws2.cell(row=i+1, column=j+1, value='')
             #开始复制
             for i,row in enumerate(ws1.iter_rows()):
