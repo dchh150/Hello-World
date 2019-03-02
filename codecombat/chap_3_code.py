@@ -30,6 +30,8 @@ def attack(enemy = None , bashEnemy = True , cleaveEnemy = True):
             hero.bash(enemy)
         elif hero.isReady("cleave") and cleaveEnemy and hero.distanceTo(enemy) <= 10:
             hero.cleave(enemy)
+        elif hero.canCast("chain-lightning", enemy) :
+            hero.cast("chain-lightning", enemy)
         else:
             hero.attack(enemy)
 

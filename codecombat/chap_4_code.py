@@ -44,3 +44,17 @@ def summonDiff(summonTypes = ["soldier","soldier","archer"]):
         hero.summon(summontype)
 
 
+def commandDefend(defendPoints):
+    #分配士兵到defendPoints的点中守备
+    soldiers = hero.findByType("soldier")
+    archers = hero.findByType("archer")
+    for i in range( len(soldiers) ):
+        friend = soldiers[i]
+        point = defendPoints[i % len(defendPoints)]
+        hero.command(friend,"defend",point)
+    for i in range( len(archers) ):
+        friend = archers[i]
+        point = defendPoints[i % len(defendPoints)]
+        hero.command(friend,"defend",point)
+
+
