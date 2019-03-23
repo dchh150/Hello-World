@@ -58,3 +58,49 @@ def commandDefend(defendPoints):
         hero.command(friend,"defend",point)
 
 
+
+def chooseTarget(friend):
+# 根据士兵类型决定要攻击什么
+    targetList=["warlock","tower","catapult","fangrider"]
+    fristtargets = None
+    for t in targetList:
+        if len(hero.findByType(t)) >0:
+            fristtargets = hero.findByType(t)
+            break
+    if friend.type in ["soldier","paladin"] and fristtargets:
+        return friend.findNearest(fristtargets)
+    else:
+        return friend.findNearest(friend.findEnemies())
+        
+
+
+def lowestHealthPaladin():
+# 找到生命值最低的武士
+    lowestHealth = 99999
+    lowestFriend = None
+    friends = hero.findFriends()
+    for friend in friends:
+        if friend.type != "paladin":
+            continue
+        if friend.health < lowestHealth and friend.health < friend.maxHealth:
+            lowestHealth = friend.health
+            lowestFriend = friend
+
+    return lowestFriend
+
+
+def commandPaladin(paladin):
+    # 使用函数 lowestHealthPaladin() 找到生命值最低的武士，并治疗
+    # 你能使用 paladin.canCast("heal") 和 command(paladin, "cast", "heal", target)
+    # 武士也能防御：command(paladin, "shield")
+    # 不要忘了他们还能攻击
+    lowest = lowestHealthPaladin()
+    if lowest and paladin.canCast("heal"):
+        hero.command(paladin, "cast", "heal",lowest)
+    elif paladin.health < paladin.maxHealth*1/2:
+        hero.command(paladin, "shield")
+    else:
+        enemy = paladin.findNearestEnemy()
+        if enemy:
+            hero.command(paladin, "attack", enemy)
+
