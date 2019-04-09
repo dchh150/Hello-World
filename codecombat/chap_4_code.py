@@ -58,10 +58,9 @@ def commandDefend(defendPoints):
         hero.command(friend,"defend",point)
 
 
-
 def chooseTarget(friend):
 # 根据士兵类型决定要攻击什么
-    targetList=["warlock","tower","catapult","fangrider"]
+    targetList=["witch","warlock","tower","catapult","fangrider"]
     fristtargets = None
     for t in targetList:
         if len(hero.findByType(t)) >0:
@@ -71,21 +70,19 @@ def chooseTarget(friend):
         return friend.findNearest(fristtargets)
     else:
         return friend.findNearest(friend.findEnemies())
-        
 
 
-def lowestHealthPaladin():
+def lowestHealthPaladin(onlyPaladin = False):
 # 找到生命值最低的武士
     lowestHealth = 99999
     lowestFriend = None
     friends = hero.findFriends()
     for friend in friends:
-        if friend.type != "paladin":
+        if onlyPaladin and friend.type != "paladin":
             continue
         if friend.health < lowestHealth and friend.health < friend.maxHealth:
             lowestHealth = friend.health
             lowestFriend = friend
-
     return lowestFriend
 
 
