@@ -56,4 +56,4 @@ class BasicTextParser(Parser):
 handler = HTMLRenderer()
 parser = BasicTextParser(handler)
 
-parser.parser(sys.stdin)
+parser.parse(sys.stdin)
