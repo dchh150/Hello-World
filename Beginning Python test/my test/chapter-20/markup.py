@@ -1,6 +1,6 @@
 # 代码清单20-6 主程序（markup.py）
 #可以像运行原型那样运行最终的程序。
-# $ python markup.py < test_input.txt > test_output.html
+# $ python markup.py test_input.txt test_output.html
 
 import sys, re
 from handlers import *
