@@ -2,18 +2,19 @@ from xml.dom.minidom import parse
 import xml.dom.minidom
 
 
+def printdata(futree,tagname):
+    tname = futree.getElementsByTagName(tagname)
+    try:
+        return tname[0].childNodes[0].data
+    except:
+        return ""
+
+
 def printAddionLing(fileN):
+    #查找有聚灵作用的物品
     # 使用minidom解析器打开 XML 文档
     DOMTree = xml.dom.minidom.parse(fileN)
     ThingDefs = DOMTree.documentElement
-
-    def printdata(futree,tagname):
-        tname = futree.getElementsByTagName(tagname)
-        try:
-            return tname[0].childNodes[0].data
-        except:
-            return ""
-
     ThingDef = ThingDefs.getElementsByTagName("ThingDef")
     if not ThingDef:
         return None
@@ -32,6 +33,27 @@ def printAddionLing(fileN):
                 print(printdata(Element[0],"Radius"), end ="\t")
             print('')
 
+
+def printAccommodate(fileN):
+    #查找物品吸收灵力效率
+    # 使用minidom解析器打开 XML 文档
+    DOMTree = xml.dom.minidom.parse(fileN)
+    ThingDefs = DOMTree.documentElement
+    ThingDef = ThingDefs.getElementsByTagName("ThingDef")
+    somest = ["ThingName","Attenuation","Absorption","Accommodate"]
+    def nextif(et):
+        return printdata(et,"Accommodate") and float(printdata(et,"Accommodate")) > 1
+    if not ThingDef:
+        return None
+    for st in somest:
+        print(st, end ="\t")
+    print('')
+    for thing in ThingDef:
+        if not nextif(thing):
+            continue
+        for st in somest:
+            print(printdata(thing,st), end ="\t")    
+        print('')
 
 if __name__ == "__main__":
     docs=[
@@ -56,7 +78,8 @@ if __name__ == "__main__":
     ]
     for doc in docs:
         try:
-            printAddionLing(doc)
+            #printAddionLing(doc)
+            printAccommodate(doc)
         except:
-            print(doc)
+            print("查询失败的文件：",doc)
     input("按任意键退出")
