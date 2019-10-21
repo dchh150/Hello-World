@@ -19,18 +19,19 @@ def printAddionLing(fileN):
     if not ThingDef:
         return None
     for thing in ThingDef:
-        nextif = printdata(thing,"AddionLing") and printdata(thing,"AddionRadius") and float(printdata(thing,"AddionLing")) > 0 and float(printdata(thing,"AddionRadius")) > 0
+        #nextif = printdata(thing,"AddionLing") and printdata(thing,"AddionRadius") and float(printdata(thing,"AddionLing")) > 0 and float(printdata(thing,"AddionRadius")) > 0
+        nextif = printdata(thing,"AddionLing") and float(printdata(thing,"AddionLing")) > 0 
         if nextif:
-            print(printdata(thing,"ThingName"), end ="\t")
-            print(printdata(thing,"AddionLing"), end ="\t")
-            print(printdata(thing,"AddionRadius"), end ="\t")
-            print(printdata(thing,"AddionFailing"), end ="\t")
-            print(printdata(thing,"AddionFailRadius"), end ="\t")
+            print(printdata(thing,"ThingName"), end =";")
+            print(printdata(thing,"AddionLing"), end =";")
+            print(printdata(thing,"AddionRadius"), end =";")
+            print(printdata(thing,"AddionFailing"), end =";")
+            print(printdata(thing,"AddionFailRadius"), end =";")
             Element = thing.getElementsByTagName("Element")
             if Element:
-                print(printdata(Element[0],"Kind"), end ="\t")
-                print(printdata(Element[0],"Value"), end ="\t")
-                print(printdata(Element[0],"Radius"), end ="\t")
+                print(printdata(Element[0],"Kind"), end =";")
+                print(printdata(Element[0],"Value"), end =";")
+                print(printdata(Element[0],"Radius"), end =";")
             print('')
 
 
@@ -46,13 +47,13 @@ def printAccommodate(fileN):
     if not ThingDef:
         return None
     for st in somest:
-        print(st, end ="\t")
+        print(st, end =";")
     print('')
     for thing in ThingDef:
         if not nextif(thing):
             continue
         for st in somest:
-            print(printdata(thing,st), end ="\t")    
+            print(printdata(thing,st), end =";")    
         print('')
 
 if __name__ == "__main__":
@@ -78,8 +79,8 @@ if __name__ == "__main__":
     ]
     for doc in docs:
         try:
-            #printAddionLing(doc)
-            printAccommodate(doc)
+            printAddionLing(doc)
+            #printAccommodate(doc)
         except:
             print("查询失败的文件：",doc)
     input("按任意键退出")
