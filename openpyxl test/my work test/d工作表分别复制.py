@@ -11,8 +11,8 @@ def d_copysheets(loadfl,loadsheets,savefl,savesheets,max_column=None,max_row=Non
     """
     assert len(loadsheets)==len(savesheets)
     try:
-        wb1=load_workbook(filename=loadfl)
-        wb2=load_workbook(filename=savefl)
+        wb1=load_workbook(filename=loadfl,keep_vba=True)
+        wb2=load_workbook(filename=savefl,keep_vba=True)
         for i,sheet in enumerate(loadsheets):
             ws1=wb1[sheet]
             ws2=wb2[savesheets[i]]
